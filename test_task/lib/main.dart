@@ -24,14 +24,15 @@ class _TestTaskState extends State<TestTask> {
   List<Color> colorsOfScreen = [
     Colors.white, Colors.yellow,
     Colors.red,  Colors.amber,
-    Colors.greenAccent, Colors.orange, Colors.cyanAccent,
-    Colors.cyan, Colors.green, Colors.grey,
+    Colors.greenAccent, Colors.orange,
+    Colors.cyanAccent,  Colors.cyan,
+    Colors.green, Colors.grey,
     Colors.teal, Colors.blue,
   ];
 
   int selectedRandomNumber = 1;
 
-  Color setColor(){
+  Color exchangeTextColor(){
     if( selectedRandomNumber >= 7 ){
       return Colors.white;
     }else{
@@ -44,7 +45,7 @@ class _TestTaskState extends State<TestTask> {
     return 'Font$fontNumber';
   }
 
-  Color changeColor(){
+  Color exchangeBackgroundColor(){
     selectedRandomNumber = Random().nextInt(colorsOfScreen.length);
     return colorsOfScreen[selectedRandomNumber];
   }
@@ -55,12 +56,21 @@ class _TestTaskState extends State<TestTask> {
       height: double.infinity,
       width: double.infinity,
       child: FlatButton(
-        color: changeColor(),
+        color: exchangeBackgroundColor(),
         onPressed: (){
           setState(() {
           });
         },
-        child: Text('Hey there',style: TextStyle(color: setColor(),fontSize: 10.0*selectedRandomNumber+6,fontFamily: selectedFont(), ),),
+        child: Center(
+            child: Text(
+              'Hey there',
+              style: TextStyle(
+                color: exchangeTextColor(),
+                fontSize: (10.0 * selectedRandomNumber + 6),
+                fontFamily: selectedFont(),
+              ),
+            ),
+        ),
       ),
     );
   }
